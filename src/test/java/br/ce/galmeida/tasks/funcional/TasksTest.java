@@ -1,24 +1,35 @@
 package br.ce.galmeida.tasks.funcional;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TasksTest {
 	
-	public WebDriver acessarAplicacao() {
-		WebDriver driver = new ChromeDriver();
-		driver.navigate().to("http:/localhost:8001/tasks");
+	public WebDriver acessarAplicacao() throws MalformedURLException {
+//		WebDriver driver = new ChromeDriver();
+		DesiredCapabilities cap = new DesiredCapabilities();
+		ChromeOptions opt = new ChromeOptions();
+		
+		cap.setCapability(ChromeOptions.CAPABILITY, opt);
+		WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
+		
+		driver.navigate().to("http://192.168.31.118:8001/tasks");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
 	}
-	
+
 	@Test
-	public void deveSalvarTarefaComSucesso() {
+	public void deveSalvarTarefaComSucesso() throws MalformedURLException {
 		WebDriver driver = acessarAplicacao();
 		
 		try {
@@ -36,7 +47,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void deveSalvarTarefaCSemDescricao() {
+	public void deveSalvarTarefaCSemDescricao() throws MalformedURLException {
 		WebDriver driver = acessarAplicacao();
 		
 		try {
@@ -53,7 +64,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void deveSalvarTarefaCSemData() {
+	public void deveSalvarTarefaCSemData() throws MalformedURLException {
 		WebDriver driver = acessarAplicacao();
 		
 		try {
@@ -71,7 +82,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void deveSalvarTarefaComDataPassada() {
+	public void deveSalvarTarefaComDataPassada() throws MalformedURLException {
 		WebDriver driver = acessarAplicacao();
 		
 		try {
