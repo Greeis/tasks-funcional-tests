@@ -21,7 +21,7 @@ public class HealthCheckIT {
 		DesiredCapabilities cap = new DesiredCapabilities();
 		ChromeOptions opt = new ChromeOptions();
 		cap.setCapability(ChromeOptions.CAPABILITY, opt);
-		WebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
+		WebDriver driver = new RemoteWebDriver(new URL("http://192.168.31.118:4444/wd/hub"), cap);
 		
 		try {
 			driver.navigate().to("http://192.168.31.118:9999/tasks");
