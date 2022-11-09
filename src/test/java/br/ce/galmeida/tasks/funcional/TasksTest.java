@@ -24,7 +24,7 @@ public class TasksTest {
 		WebDriver driver = new RemoteWebDriver(new URL("http://192.168.31.118:4444/wd/hub"), cap);
 		
 		driver.navigate().to("http://192.168.31.118:8001/tasks");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		return driver;
 	}
 
@@ -52,7 +52,6 @@ public class TasksTest {
 		
 		try {
 			driver.findElement(By.id("addTodo")).click();
-			
 			driver.findElement(By.id("dueDate")).sendKeys("10/10/2030");
 			driver.findElement(By.id("saveButton")).click();
 			
